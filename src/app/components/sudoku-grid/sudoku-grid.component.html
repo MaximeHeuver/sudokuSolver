@@ -1,0 +1,13 @@
+<div class="flex justify-center items-center h-full">
+  <div *ngIf="(sudokuSteps$ | async) as steps">
+    <div class="grid grid-cols-9 gap-4">
+      <input
+        #inputElement
+        *ngFor="let tile of steps[steps.length - 1].state; trackBy:trackByFn"
+        maxlength="1"
+        (keyup)="handleInput(inputElement.value, tile.id);"
+        [value]="tile.solvedValue"
+        class="w-10 h-10 text-center rounded-xl focus-visible:outline-primary">
+    </div>
+  </div>
+</div>

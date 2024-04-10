@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tile {
+  @apply bg-tile;
+  @apply rounded-tile;
+  width: 100%;
+  padding: 2rem;
+}
+
+h1 {
+  font-family: Arial;
+  font-weight: 900;
+  line-height: 64px;
+  font-size: 48px;
+  @apply text-primary
+}
+
+p {
+  font-family: Arial;
+  font-weight: 600;
+  line-height: 24px;
+  font-size: 16px;
+  @apply text-text
+}
