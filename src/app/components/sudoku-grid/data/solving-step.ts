@@ -1,5 +1,5 @@
 import {Sudoku} from "./sudoku";
-import {SolvingStrategy} from "../service/solving-strategy";
+import {SolvingStrategy} from "./solving-strategy";
 import {Injectable, Input} from "@angular/core";
 
 export class SolvingStep {

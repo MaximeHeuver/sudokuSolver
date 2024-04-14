@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
-import {SudokuLogic} from "./data/sudoku-logic";
-import {Observable, Subject} from "rxjs";
-import {Sudoku} from "./data/sudoku";
+import {Observable} from "rxjs";
 import {SudokuService} from "./service/sudoku.service";
 import {SolvingStep} from "./data/solving-step";
-import {Tile} from "./data/tile";
+import {StepExplanationComponent} from "./components/step-explanation/step-explanation.component";
 
 @Component({
   selector: 'app-sudoku-grid',
@@ -14,13 +12,16 @@ import {Tile} from "./data/tile";
     NgForOf,
     AsyncPipe,
     NgIf,
-    NgClass
+    NgClass,
+    StepExplanationComponent
   ],
   templateUrl: './sudoku-grid.component.html',
   styleUrl: './sudoku-grid.component.scss'
 })
 export class SudokuGridComponent implements OnInit {
   sudokuSteps$: Observable<SolvingStep[]>
+
+  focussedTileIndex: number = -1;
 
   constructor(private service: SudokuService) {
   }

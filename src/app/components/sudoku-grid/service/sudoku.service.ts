@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {SolvingStep} from "../data/solving-step";
-import {SolvingStrategy} from "./solving-strategy";
-import {SudokuLogic} from "../data/sudoku-logic";
+import {SolvingStrategy} from "../data/solving-strategy";
+import {SudokuLogic} from "../logic/sudoku-logic";
 import {Sudoku} from "../data/sudoku";
 import {Tile} from "../data/tile";
 
@@ -31,10 +31,11 @@ export class SudokuService {
 
     this.validateInput(affectedTile, value)
 
-    let newSteps: SolvingStep[] = SudokuLogic.updateSudokuAndDocumentResult(affectedTile, value, this.currentState)
-    this.steps.concat(newSteps);
+    let newSteps: SolvingStep[] = []
 
-    this.mapAndEmitCurrentState()
+    SudokuLogic.handleManualInput(affectedTile, value, this.currentState, newSteps);
+
+    this.steps = this.steps.concat(newSteps);
 
     this.sudokuSteps$.next(this.steps)
   }
@@ -55,14 +56,5 @@ export class SudokuService {
       this.sudokuSteps$.next(this.steps)
       throw new Error(`${value} is not a valid value because another group already contains it`)
     }
-  }
-
-  private mapAndEmitCurrentState() {
-    let newState: SolvingStep = {
-      state: SudokuLogic.mapToSimpleTiles(this.currentState),
-      appliedStrategy: SolvingStrategy.ManualInput
-    }
-
-    this.steps = this.steps.concat(newState)
   }
 }

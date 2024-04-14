@@ -4,7 +4,7 @@ export class Tile {
   public id: string
   public groups: Group[];
   public possibleOptions: string[];
-  public isUsedForElimination: boolean = false;
+  public isSolveDocumented: boolean = false;
 
   constructor(possibleOptions: string[], id: string) {
     this.id = id;

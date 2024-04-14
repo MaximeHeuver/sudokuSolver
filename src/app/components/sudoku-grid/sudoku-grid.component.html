@@ -1,13 +1,28 @@
-<div class="flex justify-center items-center h-full">
-  <div *ngIf="(sudokuSteps$ | async) as steps">
-    <div class="grid grid-cols-9 gap-4">
-      <input
-        #inputElement
-        *ngFor="let tile of steps[steps.length - 1].state; trackBy:trackByFn"
-        maxlength="1"
-        (keyup)="handleInput(inputElement.value, tile.id);"
-        [value]="tile.solvedValue"
-        class="w-10 h-10 text-center rounded-xl focus-visible:outline-primary">
+<div class="grid grid-cols-3 gap-4" *ngIf="(sudokuSteps$ | async) as steps">
+  <div class="bg-tile rounded-tile w-full p-8 col-span-2">
+    <div class="flex justify-center items-center h-full">
+      <div class="grid items-stretch grid-cols-9 gap-2">
+        <div class="w-10 h-10 relative flex items-center" *ngFor="let tile of steps[steps.length - 1].state; let index = index; trackBy:trackByFn">
+
+          <div *ngIf="tile.possibleOptions.length > 1" class="absolute grid grid-cols-3 w-full text-center pointer-events-none px-0.5">
+            <p class="text-xxs text-accent" *ngFor="let option of tile.possibleOptions">{{option}}</p>
+          </div>
+
+          <input
+            #inputElement
+            maxlength="1"
+            (keyup)="handleInput(inputElement.value, tile.id);"
+            [value]="tile.solvedValue"
+            class="w-full h-full text-center rounded-xl focus-visible:outline-primary">
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="bg-tile rounded-tile w-full py-8 pl-8 col-span-1">
+    <ul class="gap-4 flex flex-col-reverse max-h-96 overflow-y-auto pr-8">
+      <li class="rounded-tile bg-white w-full p-4" *ngFor="let step of steps">
+        <app-step-explanation [step]="step"></app-step-explanation>
+      </li>
+    </ul>
   </div>
 </div>

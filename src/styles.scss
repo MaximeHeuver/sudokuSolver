@@ -9,17 +9,31 @@
   padding: 2rem;
 }
 
-h1 {
+h1, h2, h3 {
   font-family: Arial;
   font-weight: 900;
-  line-height: 64px;
+  line-height: 1.5;
+}
+
+h1 {
   font-size: 48px;
   @apply text-primary
 }
 
+h2 {
+  font-size: 32px;
+  @apply text-secondary;
+}
+
+h3 {
+  font-size: 20px;
+  @apply text-text;
+  font-weight: 600;
+}
+
 p {
   font-family: Arial;
-  font-weight: 600;
+  font-weight: 300;
   line-height: 24px;
   font-size: 16px;
   @apply text-text
